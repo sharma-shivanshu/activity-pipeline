@@ -16,13 +16,7 @@ schema = '''{
   "key_claims": [], "summary_hi": ""
 }'''
 
-prompt_template = f"""You are a political intelligence analyst extracting structured data from Hindi news articles.
-Extract the data into this EXACT JSON format, outputting NOTHING else:
-{schema}
 
-Article Text:
-{{text}}
-"""
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "qwen2.5:7b" # Colab GPU can handle 7B easily!
@@ -51,7 +45,13 @@ for filepath in article_files:
         continue # Skip failed extractions
         
     print(f"Extracting {filename}...")
-    prompt = prompt_template.format(text=text[:4000]) # constrain context length to prevent OOM
+    prompt = f"""You are a political intelligence analyst extracting structured data from Hindi news articles.
+Extract the data into this EXACT JSON format, outputting NOTHING else:
+{schema}
+
+Article Text:
+{text[:4000]}
+"""
     
     payload = {
         "model": MODEL_NAME,
