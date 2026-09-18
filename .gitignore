@@ -1,0 +1,8 @@
+# Exclude raw bulky HTML/JSON files
+raw/
+node_modules/
+.DS_Store
+
+# Include processing folders
+!processed/
+!reference/
