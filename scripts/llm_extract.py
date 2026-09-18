@@ -58,11 +58,12 @@ Article Text:
         "prompt": prompt,
         "format": "json",
         "stream": False,
+        "keep_alive": "30m",
         "options": {"temperature": 0.0}
     }
     
     try:
-        resp = requests.post(OLLAMA_URL, json=payload, timeout=120)
+        resp = requests.post(OLLAMA_URL, json=payload, timeout=300)
         if resp.status_code == 200:
             result = resp.json().get("response", "{}")
             try:
